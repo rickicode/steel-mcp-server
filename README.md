@@ -1,6 +1,15 @@
 # Steel MCP Server
 
-Install Steel Browser MCP quickly with Docker and connect via a single HTTP MCP endpoint.
+A Model Context Protocol (MCP) server that exposes Steel Browser automation over HTTP.
+It runs a Puppeteer-backed browser session and gives MCP clients standardized tools for browser control.
+Use it when you want Codex, Claude Code/Desktop, OpenCode, or Antigravity to drive Steel Browser.
+
+Core capabilities:
+- HTTP MCP endpoint for browser automation
+- Local Steel Browser via Docker Compose or Steel Cloud via API key
+- Page interaction, extraction, tabs, and session controls
+- Screenshots, PDFs, and quick scrape actions
+- Cookie/localStorage management and file uploads
 
 ## Getting Started
 
