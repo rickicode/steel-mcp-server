@@ -36,6 +36,17 @@ The bundled compose stack exposes:
 - Steel Browser UI: `http://localhost:5171`
 - MCP server: `http://localhost:8787/mcp`
 
+### Run Without Git Clone
+
+If you only want Docker Compose, download the compose file and pull the published MCP image:
+
+```bash
+curl -O https://raw.githubusercontent.com/rickicode/steel-browser-mcp/main/compose.yml
+MCP_IMAGE=ghcr.io/rickicode/steel-browser-mcp:latest docker compose up -d
+```
+
+This keeps the Steel Browser stack and MCP server fully containerized without cloning the repo.
+
 ### Verify the MCP server
 
 ```bash
