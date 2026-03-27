@@ -20,6 +20,7 @@ Add it to your client config:
 {
   "mcpServers": {
     "steel-browser": {
+      "type": "http",
       "url": "http://localhost:8787/mcp"
     }
   }

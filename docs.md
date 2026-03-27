@@ -1,8 +1,8 @@
 # Steel MCP Server Docs
 
-This document covers setup, configuration, tool coverage, session management, and troubleshooting for the Steel MCP Server.
+This document covers setup, client install, tool coverage, session management, and troubleshooting.
 
-## Overview
+## Getting Started
 
 This MCP server wraps Steel Browser with Puppeteer and exposes browser automation over HTTP MCP.
 
@@ -16,61 +16,32 @@ Use it for:
 
 By default, the server is text-first: tool results return text and resources, while inline images are opt-in.
 
-## Full Setup
+### Install
 
-### Prerequisites
-
-1. Docker and Docker Compose installed
-2. An MCP client that supports HTTP MCP, such as Codex or Claude Desktop
-3. A Steel API key if you want to use Steel Cloud
-
-### Start Steel Browser and MCP
+First, start the bundled Steel Browser stack and MCP server:
 
 ```bash
 docker compose up -d
 ```
 
-The bundled compose stack exposes:
+The compose stack exposes:
 
 - Steel Browser API: `http://localhost:3000`
 - Steel Browser UI: `http://localhost:5171`
 - MCP server: `http://localhost:8787/mcp`
 
-### Run Without Git Clone
-
-If you only want Docker Compose, download the compose file and pull the published MCP image:
+If you want Docker-only usage without cloning the repo, download the compose file and pull the published MCP image:
 
 ```bash
 curl -O https://raw.githubusercontent.com/rickicode/steel-browser-mcp/main/compose.yml
 MCP_IMAGE=ghcr.io/rickicode/steel-browser-mcp:latest docker compose up -d
 ```
 
-This keeps the Steel Browser stack and MCP server fully containerized without cloning the repo.
-
-### Verify the MCP server
-
-```bash
-curl http://localhost:8787/health
-```
-
-Expected response:
-
-```json
-{"status":"ok"}
-```
-
-## Client Setup
+### Standard Config
 
 Use the HTTP MCP URL `http://localhost:8787/mcp` in your client config.
 
-| Client | Config file / command | Minimal config |
-| --- | --- | --- |
-| Codex | `~/.codex/config.toml` | ```toml
-[mcp_servers.steel-browser]
-url = "http://localhost:8787/mcp"
-enabled = true
-``` |
-| Claude Code | `.mcp.json` | ```json
+```json
 {
   "mcpServers": {
     "steel-browser": {
@@ -79,9 +50,66 @@ enabled = true
     }
   }
 }
-``` |
-| Claude Desktop | Connectors UI | If the server is localhost-only, expose it through a tunnel first, then add it in Settings > Connectors. |
-| OpenCode | `opencode.json` / `opencode.jsonc` | ```json
+```
+
+## Client Setup
+
+<details>
+<summary>Codex</summary>
+
+Use `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.steel-browser]
+url = "http://localhost:8787/mcp"
+enabled = true
+```
+
+Or add it from the CLI:
+
+```bash
+codex mcp add steel-browser http://localhost:8787/mcp
+```
+
+</details>
+
+<details>
+<summary>Claude Code</summary>
+
+Use `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "steel-browser": {
+      "type": "http",
+      "url": "http://localhost:8787/mcp"
+    }
+  }
+}
+```
+
+Or add it from the CLI:
+
+```bash
+claude mcp add steel-browser http://localhost:8787/mcp --type http
+```
+
+</details>
+
+<details>
+<summary>Claude Desktop</summary>
+
+Add the standard config above in a connector that supports HTTP MCP. If the server is localhost-only, expose it through a tunnel first.
+
+</details>
+
+<details>
+<summary>OpenCode</summary>
+
+Use `~/.config/opencode/opencode.json`:
+
+```json
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
@@ -92,12 +120,32 @@ enabled = true
     }
   }
 }
-``` |
-| Antigravity | `antigravity --add-mcp` | ```bash
+```
+
+</details>
+
+<details>
+<summary>Antigravity</summary>
+
+Use the CLI:
+
+```bash
 antigravity --add-mcp '{"name":"steel-browser","url":"http://localhost:8787/mcp","type":"http"}'
-``` |
+```
 
 Antigravity also supports file-based configuration under `<repo_root>/.vscode/mcp.json`.
+
+</details>
+
+## Verify
+
+Check the health endpoint:
+
+```bash
+curl http://localhost:8787/health
+```
+
+Then confirm the server responds with the expected tools through your client.
 
 ## Tools
 
