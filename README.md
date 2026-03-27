@@ -4,6 +4,8 @@ A Model Context Protocol (MCP) server for browser automation with Steel and Pupp
 
 It exposes browser automation, screenshots, session tools, and Steel quick actions over HTTP.
 
+The MCP image is published to GHCR, so users can run it with Docker Compose without cloning the repo.
+
 ## Add MCP
 
 Use this MCP URL:

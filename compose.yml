@@ -36,8 +36,7 @@ services:
 
   mcp:
     container_name: steel-mcp-server
-    build:
-      context: .
+    image: ${MCP_IMAGE:-ghcr.io/rickicode/steel-browser-mcp:latest}
     restart: unless-stopped
     network_mode: host
     environment:
