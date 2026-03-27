@@ -16,6 +16,15 @@ Use it for:
 
 By default, the server is text-first: tool results return text and resources, while inline images are opt-in.
 
+### Quick Install Links
+
+[<img src="https://img.shields.io/badge/Compose%20Only-111827?style=flat-square&label=Install%20Server&color=111827" alt="Compose only install">](#install)
+[<img src="https://img.shields.io/badge/Codex-000000?style=flat-square&label=Add%20MCP&color=000000" alt="Add to Codex">](#codex)
+[<img src="https://img.shields.io/badge/Claude%20Code-ffb000?style=flat-square&label=Add%20MCP&color=ffb000" alt="Add to Claude Code">](#claude-code)
+[<img src="https://img.shields.io/badge/Claude%20Desktop-ff6b6b?style=flat-square&label=Add%20MCP&color=ff6b6b" alt="Add to Claude Desktop">](#claude-desktop)
+[<img src="https://img.shields.io/badge/OpenCode-3b82f6?style=flat-square&label=Add%20MCP&color=3b82f6" alt="Add to OpenCode">](#opencode)
+[<img src="https://img.shields.io/badge/Antigravity-8b5cf6?style=flat-square&label=Add%20MCP&color=8b5cf6" alt="Add to Antigravity">](#antigravity)
+
 ### Install
 
 First, start the bundled Steel Browser stack and MCP server:
