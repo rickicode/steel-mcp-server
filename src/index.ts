@@ -17,6 +17,7 @@ import {
 import puppeteer, { Browser, Page } from "puppeteer";
 import dotenv from "dotenv";
 import { randomUUID } from "node:crypto";
+import { resolveSteelMode } from "./steelMode.js";
 
 dotenv.config();
 
@@ -50,28 +51,7 @@ const steelSolveCaptcha =
  * If STEEL_API_KEY is provided (and no base URL), cloud mode is assumed automatically.
  * If neither is provided, the default local Steel Browser stack in this repo is used.
  */
-function resolveSteelMode() {
-  if (steelBaseUrlEnv) {
-    return {
-      steelLocal: true,
-      steelBaseURL: steelBaseUrlEnv,
-    };
-  }
-
-  if (steelKey) {
-    return {
-      steelLocal: false,
-      steelBaseURL: "https://api.steel.dev",
-    };
-  }
-
-  return {
-    steelLocal: true,
-    steelBaseURL: "http://localhost:3005",
-  };
-}
-
-const { steelLocal, steelBaseURL } = resolveSteelMode();
+const { steelLocal, steelBaseURL } = resolveSteelMode(steelBaseUrlEnv, steelKey);
 
 function buildSteelHeaders(): Record<string, string> {
   return {
